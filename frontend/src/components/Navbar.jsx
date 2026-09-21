@@ -4,13 +4,13 @@ import { useAuth } from "../contexts/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FiHome,
-  FiUser,
   FiLogIn,
   FiLogOut,
   FiLoader,
   FiMenu,
   FiX,
   FiGrid,
+  FiShield,
 } from "react-icons/fi";
 import { useState, useRef, useEffect } from "react";
 
@@ -53,36 +53,28 @@ const Navbar = () => {
   // Navigation items based on authentication state
   const getNavItems = () => {
     if (loading) {
-      // Only show Home when loading
       return [
-        { path: "/", label: "Home", icon: <FiHome className="h-5 w-5" /> },
+        { path: "/", label: "Home", icon: <FiHome className="h-4 w-4" /> },
       ];
     }
 
     if (victim) {
-      // Victim is authenticated
       return [
-        { path: "/", label: "Home", icon: <FiHome className="h-5 w-5" /> },
+        { path: "/", label: "Home", icon: <FiHome className="h-4 w-4" /> },
         {
           path: "/dashboard",
           label: "Dashboard",
-          icon: <FiGrid className="h-5 w-5" />,
-        },
-        {
-          path: "/profile",
-          label: "Profile",
-          icon: <FiUser className="h-5 w-5" />,
+          icon: <FiGrid className="h-4 w-4" />,
         },
       ];
     }
 
-    // Victim is not authenticated
     return [
-      { path: "/", label: "Home", icon: <FiHome className="h-5 w-5" /> },
+      { path: "/", label: "Home", icon: <FiHome className="h-4 w-4" /> },
       {
         path: "/auth/login",
         label: "Login",
-        icon: <FiLogIn className="h-5 w-5" />,
+        icon: <FiLogIn className="h-4 w-4" />,
       },
     ];
   };
@@ -90,55 +82,64 @@ const Navbar = () => {
   const navItems = getNavItems();
 
   return (
-    <nav className="bg-gray-800 border-b border-gray-700 shadow-lg relative">
+    <nav className="h-16 shrink-0 bg-white/95 backdrop-blur-md border-b border-stone-200/90 shadow-xs relative z-50 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo/Brand */}
           <div className="flex items-center">
             <Link
               to="/"
-              className="flex-shrink-0 flex items-center text-xl font-bold text-white"
+              className="flex-shrink-0 flex items-center gap-2.5 text-xl font-extrabold text-stone-900 group"
             >
-              <span className="bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
-                AuthApp
+              <div className="w-8.5 h-8.5 rounded-xl bg-gradient-to-tr from-emerald-700 to-teal-600 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
+                <FiShield className="h-5 w-5" />
+              </div>
+              <span className="bg-gradient-to-r from-emerald-800 to-teal-700 bg-clip-text text-transparent tracking-tight">
+                SARTHI
+              </span>
+              <span className="hidden sm:inline-block px-2.5 py-0.5 text-[11px] font-bold bg-amber-100/80 text-amber-900 rounded-full border border-amber-200/80">
+                Victim Protection & Safety
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  location.pathname === item.path
-                    ? "text-white bg-gray-900"
-                    : "text-gray-300 hover:text-white hover:bg-gray-700"
-                }`}
-              >
-                <span className="mr-1">{item.icon}</span>
-                {item.label}
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center space-x-2">
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.path;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer ${
+                    isActive
+                      ? "text-emerald-900 bg-emerald-50 border border-emerald-200/80 shadow-xs"
+                      : "text-stone-600 hover:text-emerald-900 hover:bg-stone-100/80"
+                  }`}
+                >
+                  {item.icon}
+                  {item.label}
+                </Link>
+              );
+            })}
 
-            {/* Show logout button only when victim is authenticated and not loading */}
+            {/* Show logout button only when victim is authenticated */}
             {victim && !loading && (
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={handleLogout}
-                className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-bold text-stone-600 hover:text-red-700 hover:bg-red-50 transition-colors ml-2 cursor-pointer"
               >
-                <FiLogOut className="h-5 w-5 mr-1" />
+                <FiLogOut className="h-4 w-4" />
                 Logout
               </motion.button>
             )}
 
-            {/* Show loading indicator during authentication */}
+            {/* Loading indicator */}
             {loading && (
-              <div className="flex items-center text-gray-400 px-3 py-2">
-                <FiLoader className="h-5 w-5 animate-spin mr-2" />
+              <div className="flex items-center text-stone-400 px-3 py-2 text-sm font-medium">
+                <FiLoader className="h-4 w-4 animate-spin mr-2" />
                 Authenticating...
               </div>
             )}
@@ -148,7 +149,7 @@ const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={toggleMobileMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              className="inline-flex items-center justify-center p-2 rounded-xl text-stone-600 hover:text-stone-900 hover:bg-stone-100 focus:outline-none"
             >
               {isMobileMenuOpen ? (
                 <FiX className="block h-6 w-6" />
@@ -160,7 +161,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation - Positioned in top right corner */}
+      {/* Mobile Navigation Dropdown */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <div className="absolute top-full right-0 z-50 md:hidden">
@@ -170,42 +171,33 @@ const Navbar = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -10 }}
               transition={{ duration: 0.15 }}
-              className="bg-gray-800 border border-gray-700 rounded-lg shadow-xl w-48 mt-1 mr-2 overflow-hidden"
+              className="bg-white border border-stone-200 rounded-2xl shadow-xl w-52 mt-1 mr-3 overflow-hidden p-1.5"
             >
-              <div className="py-1">
+              <div className="space-y-1">
                 {navItems.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
                     onClick={closeMobileMenu}
-                    className={`flex items-center px-4 py-2 text-sm transition-colors ${
+                    className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-colors ${
                       location.pathname === item.path
-                        ? "text-white bg-gray-900"
-                        : "text-gray-300 hover:text-white hover:bg-gray-700"
+                        ? "text-emerald-900 bg-emerald-50 font-bold"
+                        : "text-stone-700 hover:bg-stone-100"
                     }`}
                   >
-                    <span className="mr-2">{item.icon}</span>
+                    {item.icon}
                     {item.label}
                   </Link>
                 ))}
 
-                {/* Show logout button only when victim is authenticated and not loading */}
                 {victim && !loading && (
                   <button
                     onClick={handleLogout}
-                    className="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
+                    className="w-full flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-sm font-bold text-red-700 hover:bg-red-50 transition-colors"
                   >
-                    <FiLogOut className="h-5 w-5 mr-2" />
+                    <FiLogOut className="h-4 w-4" />
                     Logout
                   </button>
-                )}
-
-                {/* Show loading indicator during authentication */}
-                {loading && (
-                  <div className="flex items-center px-4 py-2 text-sm text-gray-400">
-                    <FiLoader className="h-5 w-5 animate-spin mr-2" />
-                    Authenticating...
-                  </div>
                 )}
               </div>
             </motion.div>
