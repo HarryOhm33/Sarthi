@@ -8,7 +8,6 @@ import {
   FiCheckCircle,
   FiMapPin,
   FiFileText,
-  FiAward,
 } from "react-icons/fi";
 
 const Profile = () => {
@@ -17,7 +16,7 @@ const Profile = () => {
   if (!victim) return null;
 
   return (
-    <div className="max-w-5xl mx-auto space-y-5">
+    <div className="w-full space-y-5 pb-6">
       {/* 🌟 Compact Header Banner */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
@@ -51,7 +50,7 @@ const Profile = () => {
       </motion.div>
 
       {/* 📊 2-Column Info Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
         {/* Card 1: Personal & Account */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}

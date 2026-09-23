@@ -3,7 +3,7 @@ if (process.env.NODE_ENV != "production") {
 }
 const connectDB = require("./config/db");
 connectDB();
-// require("./utils/cronJobs");
+require("./jobs/analyticsJob");
 
 const express = require("express");
 const app = express();
@@ -14,9 +14,11 @@ const port = process.env.PORT;
 
 const ExpressError = require("./utils/ExpressError");
 const authRoute = require("./routes/authRoute");
+const chatRoute = require("./routes/chatRoute");
+const adminRoute = require("./routes/adminRoute");
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({ extended: true, limit: "15mb" }));
+app.use(express.json({ limit: "15mb" }));
 app.use(cookieParser()); // ✅ Middleware for handling cookies
 
 corsOptions = {
@@ -28,6 +30,8 @@ corsOptions = {
 app.use(cors(corsOptions)); // ✅ CORS Middleware
 
 app.use("/api/auth", authRoute);
+app.use("/api/chat", chatRoute);
+app.use("/api/admin", adminRoute);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Not a Valid Route"));

@@ -133,6 +133,17 @@ const Login = () => {
           <FiCheckCircle className="h-4 w-4 text-emerald-600 shrink-0" />
           <span>100% Encrypted & Confidential Portal Access</span>
         </div>
+
+        {/* Officer & Admin Portal Link */}
+        <div className="pt-3 border-t border-stone-200/80 text-center">
+          <Link
+            to="/admin/login"
+            className="inline-flex items-center gap-1.5 text-xs font-extrabold text-stone-600 hover:text-emerald-800 transition-colors"
+          >
+            <FiShield className="h-3.5 w-3.5 text-emerald-700" />
+            <span>Authorized Officer or Administrator? Go to Admin Portal &rarr;</span>
+          </Link>
+        </div>
       </motion.div>
     </div>
   );

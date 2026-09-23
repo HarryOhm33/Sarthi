@@ -165,3 +165,36 @@ module.exports.resetPassword = async (req, res) => {
     message: "Password reset successful. Please log in.",
   });
 };
+
+// 📌 Authenticated Change/Reset Password from Settings
+module.exports.changePassword = async (req, res) => {
+  const victimId = req.victim._id;
+  const { currentPassword, newPassword } = req.body;
+
+  if (!currentPassword || !newPassword) {
+    return res.status(400).json({ message: "Both current and new password are required" });
+  }
+
+  if (newPassword.length < 6) {
+    return res.status(400).json({ message: "New password must be at least 6 characters long" });
+  }
+
+  const victim = await Victim.findById(victimId);
+  if (!victim) {
+    return res.status(404).json({ message: "Victim not found" });
+  }
+
+  const isMatch = await bcrypt.compare(currentPassword, victim.password);
+  if (!isMatch) {
+    return res.status(400).json({ message: "Current password is incorrect" });
+  }
+
+  const hashed = await bcrypt.hash(newPassword, 10);
+  victim.password = hashed;
+  await victim.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Password updated successfully!",
+  });
+};

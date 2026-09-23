@@ -11,7 +11,6 @@ import {
   FiSearch,
   FiCheckCircle,
   FiHelpCircle,
-  FiMapPin,
   FiUsers,
   FiFileText,
 } from "react-icons/fi";
@@ -21,50 +20,20 @@ import { useAuth } from "../contexts/AuthContext";
 const Home = () => {
   const navigate = useNavigate();
   const { victim } = useAuth();
-  const [selectedDistrict, setSelectedDistrict] = useState("Darbhanga");
-
-  const districtHelplines = {
-    Darbhanga: {
-      dlsa: "06272-245123",
-      spOffice: "+91 94318 18345",
-      protectionOfficer: "Smt. Anjali Sharma (SC/ST Cell)",
-      status: "Active & Ready",
-    },
-    Patna: {
-      dlsa: "0612-2219456",
-      spOffice: "+91 94318 00001",
-      protectionOfficer: "Shri Rajesh Verma (Victim Welfare)",
-      status: "Active & Ready",
-    },
-    Gaya: {
-      dlsa: "0631-2223100",
-      spOffice: "+91 94318 18200",
-      protectionOfficer: "Shri Alok Nath (Legal Relief)",
-      status: "Active & Ready",
-    },
-    Muzaffarpur: {
-      dlsa: "0621-2244500",
-      spOffice: "+91 94318 18450",
-      protectionOfficer: "Smt. Priyanka Roy (SC/ST Welfare)",
-      status: "Active & Ready",
-    },
-  };
-
-  const currentInfo = districtHelplines[selectedDistrict] || districtHelplines["Darbhanga"];
 
   return (
     <div className="min-h-screen bg-stone-100 text-stone-800 font-sans selection:bg-emerald-100 selection:text-emerald-900">
       {/* 🌿 Emergency Top Banner (Warm Neutral & Amber) */}
       <div className="bg-amber-100/90 text-amber-950 py-2.5 px-4 text-center text-xs sm:text-sm font-semibold border-b border-amber-200/90 shadow-xs flex items-center justify-center gap-2 flex-wrap">
         <span className="bg-amber-800 text-amber-50 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider">
-          24/7 Helpline Support
+          NHAA 24/7 Helpline
         </span>
-        <span>Need Immediate Legal Guidance or Emergency Protection? Call Toll-Free:</span>
+        <span>National Helpline Against Atrocities (PoA Act): Call Toll-Free</span>
         <a
-          href="tel:18001234567"
+          href="tel:14566"
           className="underline font-extrabold hover:text-emerald-900 flex items-center gap-1"
         >
-          <FiPhoneCall className="h-3.5 w-3.5" /> 1800-SARTHI-HELP (1800-123-4567)
+          <FiPhoneCall className="h-3.5 w-3.5" /> 14566 (NHAA Toll-Free)
         </a>
       </div>
 
@@ -258,85 +227,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 📍 District Support Search (Warm Neutrals & Slate) */}
-      <section className="py-16 bg-stone-100/70 border-b border-stone-200">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-lg border border-stone-200">
-            <div className="text-center max-w-xl mx-auto mb-8">
-              <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider">
-                District Officer Directory
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-stone-900 mt-2">
-                Locate District Support Contacts
-              </h2>
-              <p className="text-stone-600 text-sm mt-1">
-                Select your district to view assigned District Legal Services Authority
-                (DLSA) contacts & Welfare Officers.
-              </p>
-            </div>
 
-            {/* District Selector */}
-            <div className="max-w-md mx-auto mb-8">
-              <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">
-                Select District
-              </label>
-              <div className="relative">
-                <FiMapPin className="absolute left-4 top-3.5 text-emerald-700 h-5 w-5" />
-                <select
-                  value={selectedDistrict}
-                  onChange={(e) => setSelectedDistrict(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-300 rounded-2xl text-stone-900 font-bold focus:outline-none focus:ring-2 focus:ring-emerald-700"
-                >
-                  <option value="Darbhanga">Darbhanga</option>
-                  <option value="Patna">Patna</option>
-                  <option value="Gaya">Gaya</option>
-                  <option value="Muzaffarpur">Muzaffarpur</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Results Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-stone-50 p-6 rounded-2xl border border-stone-200">
-              <div className="p-4 bg-white rounded-xl border border-stone-200 shadow-xs">
-                <span className="text-xs font-bold text-stone-400 uppercase tracking-wider block mb-1">
-                  DLSA Legal Helpline
-                </span>
-                <p className="text-lg font-extrabold text-stone-900">
-                  {currentInfo.dlsa}
-                </p>
-              </div>
-
-              <div className="p-4 bg-white rounded-xl border border-stone-200 shadow-xs">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                  SP Office / SC-ST Cell
-                </span>
-                <p className="text-lg font-extrabold text-stone-900">
-                  {currentInfo.spOffice}
-                </p>
-              </div>
-
-              <div className="p-4 bg-white rounded-xl border border-stone-200 shadow-xs">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                  Assigned Protection Officer
-                </span>
-                <p className="text-sm font-bold text-stone-900">
-                  {currentInfo.protectionOfficer}
-                </p>
-              </div>
-
-              <div className="p-4 bg-white rounded-xl border border-stone-200 shadow-xs">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                  Support Desk Status
-                </span>
-                <p className="text-sm font-bold text-emerald-700 flex items-center gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  {currentInfo.status}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 💚 Peace & Courage Quote Section (Deep Forest Emerald & Slate) */}
       <section className="py-16 bg-gradient-to-r from-emerald-950 via-teal-950 to-stone-900 text-white relative overflow-hidden">
@@ -388,8 +279,8 @@ const Home = () => {
                 </a>
               </li>
               <li>
-                <a href="tel:18001234567" className="hover:text-white transition-colors">
-                  24/7 Helpline Support
+                <a href="tel:14566" className="hover:text-white transition-colors">
+                  NHAA 24/7 Helpline (14566)
                 </a>
               </li>
             </ul>
@@ -400,7 +291,7 @@ const Home = () => {
               Emergency Contact
             </h4>
             <p className="text-xs leading-relaxed text-stone-400">
-              Toll-Free Helpline: <strong className="text-white">1800-SARTHI-HELP</strong>
+              National Helpline Against Atrocities: <strong className="text-white">14566 (Toll-Free 24x7)</strong>
               <br />
               Email: support@sarthi.gov.in
               <br />

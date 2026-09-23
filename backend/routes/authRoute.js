@@ -11,6 +11,7 @@ const {
   forgotPassword,
   resetPassword,
   forgotPasswordMobile,
+  changePassword,
 } = require("../controllers/auth");
 
 // ✅ User Login
@@ -22,6 +23,9 @@ router.post("/forgot-password", wrapAsync(forgotPassword));
 router.post("/forgot-password-mobile", wrapAsync(forgotPasswordMobile));
 
 router.post("/reset-password", wrapAsync(resetPassword));
+
+// ✅ Authenticated Password Change
+router.post("/change-password", authenticate, wrapAsync(changePassword));
 
 // ✅ Protected Route Example
 router.post("/verify-session", authenticate, wrapAsync(verifySession));

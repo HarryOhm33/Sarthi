@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import {
   FiEdit3,
   FiUser,
+  FiSettings,
   FiHeart,
   FiShield,
   FiChevronRight,
@@ -23,6 +24,12 @@ const DashboardSidebar = () => {
       label: "Profile",
       mobileLabel: "Profile",
       icon: <FiUser className="h-5 w-5" />,
+    },
+    {
+      path: "/dashboard/settings",
+      label: "Settings",
+      mobileLabel: "Settings",
+      icon: <FiSettings className="h-5 w-5" />,
     },
   ];
 

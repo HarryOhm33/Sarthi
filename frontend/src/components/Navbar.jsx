@@ -1,6 +1,7 @@
 // src/components/Navbar.jsx
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useAdminAuth } from "../contexts/AdminAuthContext";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FiHome,
@@ -15,10 +16,14 @@ import {
 import { useState, useRef, useEffect } from "react";
 
 const Navbar = () => {
-  const { victim, logout, loading } = useAuth();
+  const { victim, logout: victimLogout, loading: loadingVictim } = useAuth();
+  const { admin, adminLogout, loadingAdmin } = useAdminAuth();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
+
+  const isLoggedIn = Boolean(victim || admin);
+  const isLoading = loadingVictim || loadingAdmin;
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -45,38 +50,49 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    if (victim) await victimLogout();
+    if (admin) await adminLogout();
     closeMobileMenu();
   };
 
-  // Navigation items based on authentication state
+  // Navigation items based on authentication state (Admin or Victim)
   const getNavItems = () => {
-    if (loading) {
+    if (isLoading) {
       return [
         { path: "/", label: "Home", icon: <FiHome className="h-4 w-4" /> },
       ];
+    }
+
+    const items = [
+      { path: "/", label: "Home", icon: <FiHome className="h-4 w-4" /> },
+    ];
+
+    if (admin) {
+      items.push({
+        path: "/admin/dashboard",
+        label: "Admin Portal",
+        icon: <FiShield className="h-4 w-4 text-emerald-600" />,
+      });
     }
 
     if (victim) {
-      return [
-        { path: "/", label: "Home", icon: <FiHome className="h-4 w-4" /> },
-        {
-          path: "/dashboard",
-          label: "Dashboard",
-          icon: <FiGrid className="h-4 w-4" />,
-        },
-      ];
+      items.push({
+        path: "/dashboard",
+        label: "Dashboard",
+        icon: <FiGrid className="h-4 w-4" />,
+      });
     }
 
-    return [
-      { path: "/", label: "Home", icon: <FiHome className="h-4 w-4" /> },
-      {
+    if (!admin && !victim) {
+      items.push({
         path: "/auth/login",
         label: "Login",
         icon: <FiLogIn className="h-4 w-4" />,
-      },
-    ];
+      });
+    }
+
+    return items;
   };
 
   const navItems = getNavItems();
@@ -123,21 +139,27 @@ const Navbar = () => {
               );
             })}
 
-            {/* Show logout button only when victim is authenticated */}
-            {victim && !loading && (
+            {/* Show logout button if any of the token is there (admin or normal victim) */}
+            {isLoggedIn && !isLoading && (
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleLogout}
                 className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-bold text-stone-600 hover:text-red-700 hover:bg-red-50 transition-colors ml-2 cursor-pointer"
+                title={`Logout from ${admin ? "Admin Portal" : "Victim Portal"}`}
               >
                 <FiLogOut className="h-4 w-4" />
-                Logout
+                <span>Logout</span>
+                {admin && (
+                  <span className="text-[10px] bg-stone-100 text-stone-700 px-1.5 py-0.5 rounded-md font-extrabold uppercase">
+                    Admin
+                  </span>
+                )}
               </motion.button>
             )}
 
             {/* Loading indicator */}
-            {loading && (
+            {isLoading && (
               <div className="flex items-center text-stone-400 px-3 py-2 text-sm font-medium">
                 <FiLoader className="h-4 w-4 animate-spin mr-2" />
                 Authenticating...
@@ -190,13 +212,14 @@ const Navbar = () => {
                   </Link>
                 ))}
 
-                {victim && !loading && (
+                {isLoggedIn && !isLoading && (
                   <button
                     onClick={handleLogout}
                     className="w-full flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-sm font-bold text-red-700 hover:bg-red-50 transition-colors"
                   >
                     <FiLogOut className="h-4 w-4" />
-                    Logout
+                    <span>Logout</span>
+                    {admin && <span className="text-[10px] text-stone-500 uppercase">(Admin)</span>}
                   </button>
                 )}
               </div>

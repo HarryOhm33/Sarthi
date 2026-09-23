@@ -1,10 +1,10 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useAdminAuth } from "../../contexts/AdminAuthContext";
 import Cookies from "js-cookie";
 import { FiLoader } from "react-icons/fi";
 
-const ProtectedAuth = () => {
+const AdminProtectedAuth = () => {
   const { victim, loading: loadingVictim } = useAuth();
   const { admin, loadingAdmin } = useAdminAuth();
 
@@ -20,7 +20,7 @@ const ProtectedAuth = () => {
   );
 
   // If validating session and any token is present, show loader instead of login
-  if (loadingVictim || loadingAdmin) {
+  if (loadingAdmin || loadingVictim) {
     if (hasAdminToken || hasVictimToken) {
       return (
         <div className="min-h-screen bg-stone-100 flex flex-col items-center justify-center gap-3 text-stone-700">
@@ -43,4 +43,4 @@ const ProtectedAuth = () => {
   return <Outlet />;
 };
 
-export default ProtectedAuth;
+export default AdminProtectedAuth;
