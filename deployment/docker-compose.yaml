@@ -1,0 +1,12 @@
+services:
+  backend:
+    image: harryohm33/sarthi-backend:latest
+    build:
+      context: ../backend
+      dockerfile: deploy/Dockerfile
+    container_name: sarthi_backend
+    restart: always
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env

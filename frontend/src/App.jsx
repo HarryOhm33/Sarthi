@@ -18,6 +18,7 @@ import AdminProtectedAuth from "./components/Protected/AdminProtectedAuth";
 import AdminProtectedRoute from "./components/Protected/AdminProtectedRoute";
 import ForgotPassword from "./Pages/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword";
+import NotFound from "./Pages/NotFound";
 
 function App() {
   return (
@@ -78,6 +79,9 @@ function App() {
                     element={<Navigate to="/admin/dashboard/users" replace />}
                   />
                 </Route>
+
+                {/* Catch-all 404 Route */}
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
           </div>
