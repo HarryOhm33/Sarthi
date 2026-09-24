@@ -24,16 +24,16 @@ const IntelligenceDossierModal = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-xs">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-stone-900/60 backdrop-blur-xs">
         <motion.div
           initial={{ opacity: 0, scale: 0.96, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 12 }}
           transition={{ duration: 0.2 }}
-          className="bg-white rounded-3xl border border-stone-200 shadow-2xl w-full max-w-2xl max-h-[92vh] flex flex-col overflow-hidden"
+          className="bg-white rounded-3xl border border-stone-200 shadow-2xl w-full max-w-2xl max-h-[94dvh] flex flex-col overflow-hidden"
         >
           {/* Modal Header */}
-          <div className="p-6 border-b border-stone-100 flex items-center justify-between gap-4 bg-stone-50/70">
+          <div className="p-4 sm:p-6 border-b border-stone-100 flex items-center justify-between gap-3 sm:gap-4 bg-stone-50/70">
             <div className="flex items-center gap-3.5">
               <div
                 className={`w-12 h-12 rounded-2xl flex items-center justify-center text-white text-lg font-black shrink-0 shadow-sm ${
@@ -89,7 +89,7 @@ const IntelligenceDossierModal = ({
           </div>
 
           {/* Modal Body (Scrollable) */}
-          <div className="p-6 overflow-y-auto space-y-5">
+          <div className="p-4 sm:p-6 overflow-y-auto space-y-4 sm:space-y-5">
             {selectedRecord.isPending ? (
               <div className="py-12 text-center space-y-4">
                 <div className="w-16 h-16 rounded-2xl bg-stone-100 flex items-center justify-center mx-auto text-stone-400">
@@ -239,7 +239,7 @@ const IntelligenceDossierModal = ({
                 </div>
 
                 {/* Timestamp & Refresh Footer */}
-                <div className="text-[11px] text-stone-400 font-semibold flex items-center justify-between pt-3 border-t border-stone-100">
+                <div className="text-[11px] text-stone-400 font-semibold flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-stone-100">
                   <span className="flex items-center gap-1.5">
                     <FiClock className="h-3.5 w-3.5" />
                     Evaluated{" "}

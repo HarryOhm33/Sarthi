@@ -25,7 +25,7 @@ function App() {
     <Router>
       <AuthProvider>
         <AdminAuthProvider>
-          <div className="h-screen w-screen flex flex-col overflow-hidden bg-stone-100">
+          <div className="h-[100dvh] w-screen flex flex-col overflow-hidden bg-stone-100">
             <Navbar />
             <div className="flex-1 min-h-0 overflow-y-auto">
               <Routes>

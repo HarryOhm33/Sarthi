@@ -30,7 +30,7 @@ const AdminLogin = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35 }}
-        className="bg-white p-8 sm:p-10 rounded-3xl shadow-xl border border-stone-200/90 w-full max-w-md space-y-6"
+        className="bg-white p-6 sm:p-10 rounded-3xl shadow-xl border border-stone-200/90 w-full max-w-md space-y-6"
       >
         {/* Brand Header */}
         <div className="text-center">

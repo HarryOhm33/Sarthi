@@ -21,7 +21,7 @@ const Profile = () => {
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+        className="bg-white p-4 sm:p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
       >
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-700 to-teal-600 text-white flex items-center justify-center text-2xl font-extrabold shadow-md shadow-emerald-700/20">
@@ -56,7 +56,7 @@ const Profile = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm space-y-4"
+          className="bg-white p-4 sm:p-6 rounded-2xl border border-stone-200 shadow-sm space-y-4"
         >
           <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-base border-b border-stone-100 pb-3">
             <FiUser className="h-5 w-5 text-emerald-700" />
@@ -103,7 +103,7 @@ const Profile = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm space-y-4"
+          className="bg-white p-4 sm:p-6 rounded-2xl border border-stone-200 shadow-sm space-y-4"
         >
           <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-base border-b border-stone-100 pb-3">
             <FiShield className="h-5 w-5 text-emerald-700" />

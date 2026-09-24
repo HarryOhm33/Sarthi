@@ -357,24 +357,24 @@ const WhatsOnYourMind = () => {
 
   return (
     <div className="w-full h-full flex flex-col min-h-0 flex-1">
-      {/* 🌟 Full-Width Header with Privacy & Advisory Notices */}
-      <div className="bg-white px-5 py-3 rounded-2xl border border-stone-200/90 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-3 shrink-0 mb-3 w-full">
+      {/* 🌟 Desktop/Tablet Header with Privacy & Advisory Notices (Hidden in mobile view to prioritize chat space) */}
+      <div className="hidden sm:flex bg-white px-5 py-3 rounded-2xl border border-stone-200/90 shadow-sm flex-col lg:flex-row lg:items-center justify-between gap-3 shrink-0 mb-3 w-full">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-700 to-teal-600 text-white flex items-center justify-center font-bold shadow-sm">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-700 to-teal-600 text-white flex items-center justify-center font-bold shadow-sm shrink-0">
             <FiShield className="h-5 w-5" />
           </div>
-          <div>
+          <div className="min-w-0">
             <h1 className="text-base font-black text-stone-900 tracking-tight flex items-center gap-2">
-              Sarthi Companion
+              <span>Sarthi Companion</span>
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" title="Active"></span>
             </h1>
-            <p className="text-stone-500 text-xs font-medium">
+            <p className="text-stone-500 text-xs font-medium truncate">
               What&apos;s on your mind today, {victim?.name || "there"}?
             </p>
           </div>
         </div>
 
-        {/* 🔒 Notices: Privacy Assurance & Settings Advice (Side-by-Side) */}
+        {/* 🔒 Notices: Privacy Assurance & Settings Advice */}
         <div className="flex flex-row items-center gap-2 text-xs flex-nowrap shrink-0 overflow-x-auto py-0.5">
           {/* Privacy Assurance Badge */}
           <div className="flex items-center gap-1.5 text-emerald-950 bg-emerald-50/90 border border-emerald-200 px-3 py-1.5 rounded-xl font-semibold shadow-2xs whitespace-nowrap shrink-0">
@@ -400,7 +400,7 @@ const WhatsOnYourMind = () => {
       </div>
 
       {/* 💬 Full-Width Messages Container */}
-      <div className="flex-1 w-full min-h-0 bg-white rounded-2xl border border-stone-200/90 shadow-sm p-4 sm:p-6 overflow-y-auto space-y-6">
+      <div className="flex-1 w-full min-h-0 bg-white rounded-xl sm:rounded-2xl border border-stone-200/90 shadow-sm p-3 sm:p-6 overflow-y-auto space-y-4 sm:space-y-6">
         {loadingHistory ? (
           <div className="h-full flex flex-col items-center justify-center text-stone-400 gap-2">
             <FiLoader className="h-6 w-6 animate-spin text-emerald-700" />
@@ -613,7 +613,7 @@ const WhatsOnYourMind = () => {
           e.preventDefault();
           handleSendMessage();
         }}
-        className="mt-3 bg-white p-2.5 rounded-2xl border border-stone-200/90 shadow-sm flex items-center gap-2 shrink-0 relative"
+        className="mt-2 sm:mt-3 bg-white p-2 sm:p-2.5 rounded-xl sm:rounded-2xl border border-stone-200/90 shadow-sm flex items-center gap-1.5 sm:gap-2 shrink-0 relative"
       >
         <input
           type="text"
@@ -621,11 +621,11 @@ const WhatsOnYourMind = () => {
           onChange={(e) => setInputMessage(e.target.value)}
           placeholder={
             isRecording
-              ? "Listening to your voice... Speak now"
-              : "Write what's on your mind or tap the mic..."
+              ? "Listening to voice... Speak now"
+              : "Type what's on your mind or tap mic..."
           }
           disabled={isSending}
-          className={`flex-1 px-4 py-2 bg-stone-50 border rounded-xl text-stone-900 placeholder-stone-400 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 focus:bg-white transition-all disabled:opacity-60 ${
+          className={`flex-1 min-w-0 px-3 sm:px-4 py-2 bg-stone-50 border rounded-xl text-stone-900 placeholder-stone-400 text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-700 focus:bg-white transition-all disabled:opacity-60 ${
             isRecording ? "border-rose-400 bg-rose-50/40" : "border-stone-200"
           }`}
         />
@@ -635,7 +635,7 @@ const WhatsOnYourMind = () => {
           type="button"
           onClick={toggleRecording}
           disabled={isSending}
-          className={`p-2.5 rounded-xl text-sm font-bold flex items-center justify-center transition-all cursor-pointer shrink-0 disabled:opacity-40 ${
+          className={`p-2 sm:p-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center transition-all cursor-pointer shrink-0 disabled:opacity-40 ${
             isRecording
               ? "bg-rose-600 text-white shadow-md ring-4 ring-rose-500/20 animate-pulse hover:bg-rose-700"
               : "bg-stone-100 hover:bg-emerald-50 text-stone-600 hover:text-emerald-800 border border-stone-200"
@@ -653,13 +653,13 @@ const WhatsOnYourMind = () => {
         <button
           type="submit"
           disabled={!inputMessage.trim() || isSending || isRecording}
-          className="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 disabled:opacity-40 text-white font-extrabold rounded-xl shadow-xs flex items-center gap-1.5 text-sm transition-all cursor-pointer shrink-0"
+          className="px-3 sm:px-4 py-2 bg-emerald-700 hover:bg-emerald-800 disabled:opacity-40 text-white font-extrabold rounded-xl shadow-xs flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm transition-all cursor-pointer shrink-0"
         >
           {isSending ? (
             <FiLoader className="h-4 w-4 animate-spin" />
           ) : (
             <>
-              <span>Send</span>
+              <span className="hidden sm:inline">Send</span>
               <FiSend className="h-3.5 w-3.5" />
             </>
           )}

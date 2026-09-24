@@ -172,28 +172,28 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-full bg-[#f8f7f5] flex flex-col p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto w-full">
+    <div className="min-h-full bg-[#f8f7f5] p-3 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 max-w-7xl mx-auto w-full">
       {/* 🏛️ Executive Command Header */}
-      <div className="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/90 shadow-xs relative overflow-hidden">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 border border-stone-200/90 shadow-xs relative overflow-hidden">
         {/* Ambient Top Glow */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-rose-500/10 via-amber-500/5 to-transparent rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
 
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 relative z-10">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-stone-900 to-stone-800 text-white flex items-center justify-center font-black shadow-lg ring-4 ring-emerald-500/10 shrink-0">
-              <FiShield className="h-7 w-7 text-emerald-400" />
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-5 relative z-10">
+          <div className="flex items-center gap-3.5 sm:gap-4">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-stone-900 to-stone-800 text-white flex items-center justify-center font-black shadow-lg ring-4 ring-emerald-500/10 shrink-0">
+              <FiShield className="h-6 w-6 sm:h-7 sm:w-7 text-emerald-400" />
             </div>
-            <div>
-              <div className="flex flex-wrap items-center gap-2.5">
-                <h1 className="text-2xl font-black text-stone-900 tracking-tight">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <h1 className="text-xl sm:text-2xl font-black text-stone-900 tracking-tight">
                   Sarthi Command Center
                 </h1>
-                <span className="px-3 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[11px] font-black uppercase tracking-wider border border-emerald-200">
+                <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[10px] sm:text-[11px] font-black uppercase tracking-wider border border-emerald-200">
                   {admin?.role || "LEGAL CELL"}
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60">
+                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Active AI Surveillance
+                  Active Surveillance
                 </span>
               </div>
               <p className="text-xs text-stone-500 font-medium mt-1">

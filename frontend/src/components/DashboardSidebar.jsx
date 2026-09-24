@@ -16,7 +16,7 @@ const DashboardSidebar = () => {
     {
       path: "/dashboard/whats-on-your-mind",
       label: "What's on your mind today?",
-      mobileLabel: "Mind Today",
+      mobileLabel: "What's on your mind today?",
       icon: <FiEdit3 className="h-5 w-5" />,
     },
     {
@@ -111,22 +111,24 @@ const DashboardSidebar = () => {
         )}
       </aside>
 
-      {/* 📱 Mobile Bottom Navigation Bar */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-stone-200 shadow-xl py-2 px-4 flex items-center justify-around">
+      {/* 📱 Mobile Bottom Navigation Bar (Equal 3-Column Grid) */}
+      <nav className="md:hidden shrink-0 bg-white/95 backdrop-blur-md border-t border-stone-200/90 shadow-lg py-1.5 px-2 grid grid-cols-3 gap-1.5 z-40 order-last">
         {navItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
             className={({ isActive }) =>
-              `flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl font-bold text-xs transition-all duration-200 ${
+              `flex flex-col items-center justify-center text-center gap-1 w-full min-h-[52px] py-1.5 px-1 rounded-xl font-bold transition-all duration-200 ${
                 isActive
-                  ? "text-emerald-800 bg-emerald-50"
-                  : "text-stone-500 hover:text-stone-900"
+                  ? "text-emerald-800 bg-emerald-50 border border-emerald-200/70 shadow-2xs"
+                  : "text-stone-500 hover:text-stone-900 hover:bg-stone-50"
               }`
             }
           >
-            {item.icon}
-            <span>{item.mobileLabel}</span>
+            <span className="shrink-0">{item.icon}</span>
+            <span className="text-[10px] sm:text-xs leading-tight text-center font-bold px-0.5">
+              {item.mobileLabel}
+            </span>
           </NavLink>
         ))}
       </nav>

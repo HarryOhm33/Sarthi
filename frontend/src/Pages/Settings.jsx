@@ -114,7 +114,7 @@ const Settings = () => {
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white p-6 rounded-2xl border border-stone-200/90 shadow-sm flex items-center justify-between gap-4 w-full"
+        className="bg-white p-4 sm:p-6 rounded-2xl border border-stone-200/90 shadow-sm flex items-center justify-between gap-4 w-full"
       >
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-700 to-teal-600 text-white flex items-center justify-center text-xl font-bold shadow-md shadow-emerald-700/20">
@@ -145,7 +145,7 @@ const Settings = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white p-6 sm:p-7 rounded-2xl border border-stone-200/90 shadow-sm space-y-5 flex flex-col justify-between"
+          className="bg-white p-4 sm:p-7 rounded-2xl border border-stone-200/90 shadow-sm space-y-5 flex flex-col justify-between"
         >
           <div className="space-y-4">
             <div className="border-b border-stone-100 pb-3 flex items-center justify-between">
@@ -271,7 +271,7 @@ const Settings = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="bg-white p-6 sm:p-7 rounded-2xl border border-stone-200/90 shadow-sm space-y-4"
+            className="bg-white p-4 sm:p-7 rounded-2xl border border-stone-200/90 shadow-sm space-y-4"
           >
             <div className="border-b border-stone-100 pb-3 flex items-center justify-between">
               <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-base">
@@ -321,7 +321,7 @@ const Settings = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white p-6 sm:p-7 rounded-2xl border border-stone-200/90 shadow-sm space-y-3"
+            className="bg-white p-4 sm:p-7 rounded-2xl border border-stone-200/90 shadow-sm space-y-3"
           >
             <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-sm">
               <FiShield className="h-4 w-4 text-emerald-700" />
